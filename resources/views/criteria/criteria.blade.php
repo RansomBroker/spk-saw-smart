@@ -48,7 +48,7 @@
                                 <td>Cost</td>
                             @endif
                             <td>
-                                <button type="button" class="btn btn-sm btn-success"><i class="fa fa-edit" aria-hidden="true"></i>
+                                <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#editData{{$criteria->id}}"><i class="fa fa-edit" aria-hidden="true"></i>
                                 </button>
                                 <form action="{{ route('criteria.delete', $criteria->id) }}" method="POST" class="m-0 p-0">
                                     @csrf
@@ -65,7 +65,6 @@
     </div>
 
     {{-- add criteria modal --}}
-    <!-- Modal -->
     <div class="modal fade" id="addCriteriaModal" tabindex="-1" role="dialog" aria-labelledby="addCriteriaModal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -104,6 +103,49 @@
             </div>
         </div>
     </div>
+
+    {{-- generate modal edit--}}
+    @foreach($criteriaData  as $criteria)
+        <div class="modal fade" id="editData{{$criteria->id}}" tabindex="-1" role="dialog" aria-labelledby="addCriteriaModal" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-primary"><i class="fa fa-edit" aria-hidden="true"></i> Edit Data Kriteria</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{route('criteria.edit', $criteria->id)}}" method="POST">
+                            @csrf
+                            @method('PATCH')
+                            <div class="form-group mb-3">
+                                <label for="code" class="form-label">Kode Kriteria <sup class="text-warning">*</sup></label>
+                                <input type="text" name="code" id="code" class="form-control" placeholder="ex: K1" required value="{{ $criteria->code }}">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="name" class="form-label">Nama Kriteria <sup class="text-warning">*</sup></label>
+                                <input type="text" name="name" id="name" class="form-control" placeholder="ex: Kriteria 1" required value="{{ $criteria->name }}">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="weight" class="form-label">Bobot Kriteria <sup class="text-warning">*</sup></label>
+                                <input type="number" name="weight" id="weight" class="form-control" placeholder="ex: 55" required value="{{ $criteria->weight }}">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="attribute" class="form-label">Atribut Kriteria <sup class="text-warning">*</sup></label>
+                                <select name="attribute" id="attribute" class="form-control" required>
+                                    <option value="">--- pilih atribut kriteria ---</option>
+                                    <option value="1" @if($criteria->attribute == 1)selected @endif>Benefit</option>
+                                    <option value="2" @if($criteria->attribute == 2)selected @endif>Cost</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Edit Data Kriteria</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
 @endsection
 @section('custom-js')
     <script>
