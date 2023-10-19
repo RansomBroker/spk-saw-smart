@@ -32,6 +32,6 @@
     </div>
 
     @include('includes.js')
-    @include('custom-js')
+    @yield('custom-js')
 </body>
 </html>
