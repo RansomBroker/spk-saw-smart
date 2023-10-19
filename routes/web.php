@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\CriteriaContoller;
+use App\Http\Controllers\DashboardController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +14,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+Route::controller(DashboardController::class)->name('dashboard.')->group(function () {
+    Route::get('/', function () {
+        return view('welcome');
+    });
 });
+
+Route::controller(CriteriaContoller::class)->name('criteria.')->group(function () {
+    Route::get('/kriteria', 'criteriaView')->name('view');
+    Route::post('/kriteria/add', 'criteriaAdd')->name('add');
+    Route::patch('/kriteria/edit/{criteria}', 'criteriaEdit')->name('edit');
+    Route::delete('/kriteria/delete/{criteria}', 'criteriaDelete')->name('delete');
+});
+

@@ -26,8 +26,8 @@
         Master Data
     </div>
 
-    <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+    <li class="nav-item @if(Route::is('criteria.view')) active @endif ">
+        <a class="nav-link" href="{{ route('criteria.view') }}">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Data Kriteria</span>
         </a>
