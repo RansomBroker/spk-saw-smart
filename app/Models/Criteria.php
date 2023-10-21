@@ -10,4 +10,9 @@ class Criteria extends Model
     use HasFactory;
     protected $table = 'criteria';
     protected $fillable = ['code', 'weight', 'name', 'attribute'];
+
+    public function subCriteria()
+    {
+        return $this->hasMany(SubCriteria::class);
+    }
 }
