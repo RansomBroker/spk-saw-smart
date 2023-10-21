@@ -32,6 +32,6 @@ Route::controller(CriteriaContoller::class)->name('criteria.')->group(function (
 Route::controller(SubCriteriaController::class)->name('subcrit.')->group(function () {
     Route::get('/sub-kriteria', 'subCriteriaView')->name('view');
     Route::post('/sub-kriteria', 'subCriteriaAdd')->name('add');
-    Route::patch('/sub-kriteria/edit/{SubCriteria}', 'subCriteriaEdit')->name('edit');
-    Route::delete('/sub-kriteria/delete/{SubCriteria}', 'subCriteriaDelete')->name('delete');
+    Route::patch('/sub-kriteria/edit/{subCriteria}', 'subCriteriaEdit')->name('edit');
+    Route::delete('/sub-kriteria/delete/{subCriteria}', 'subCriteriaDelete')->name('delete');
 });
