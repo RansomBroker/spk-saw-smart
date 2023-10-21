@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CriteriaContoller;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SubCriteriaController;
+use App\Http\Controllers\CandidateController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,4 +35,11 @@ Route::controller(SubCriteriaController::class)->name('subcrit.')->group(functio
     Route::post('/sub-kriteria', 'subCriteriaAdd')->name('add');
     Route::patch('/sub-kriteria/edit/{subCriteria}', 'subCriteriaEdit')->name('edit');
     Route::delete('/sub-kriteria/delete/{subCriteria}', 'subCriteriaDelete')->name('delete');
+});
+
+Route::controller(CandidateController::class)->name('candidate.')->group(function () {
+    Route::get('/data-calon', 'candidateView')->name('view');
+    Route::post('/data-calon/add', 'candidateAdd')->name('add');
+    Route::patch('/data-calon/edit/{candidate}', 'candidateEdit')->name('edit');
+    Route::delete('/data-calon/delete/{candidate}', 'candidateDelete')->name('delete');
 });
