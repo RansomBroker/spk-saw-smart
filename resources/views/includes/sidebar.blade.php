@@ -40,8 +40,8 @@
         </a>
     </li>
 
-    <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+    <li class="nav-item @if(Route::is('candidate.view')) active @endif">
+        <a class="nav-link" href="{{ route('candidate.view') }}">
             <i class="fa fa-users" aria-hidden="true"></i>
             <span>Data Calon</span>
         </a>
