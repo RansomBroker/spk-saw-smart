@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CriteriaContoller;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\SubCriteriaController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,3 +29,9 @@ Route::controller(CriteriaContoller::class)->name('criteria.')->group(function (
     Route::delete('/kriteria/delete/{criteria}', 'criteriaDelete')->name('delete');
 });
 
+Route::controller(SubCriteriaController::class)->name('subcrit.')->group(function () {
+    Route::get('/sub-kriteria', 'subCriteriaView')->name('view');
+    Route::post('/sub-kriteria', 'subCriteriaAdd')->name('add');
+    Route::patch('/sub-kriteria/edit/{SubCriteria}', 'subCriteriaEdit')->name('edit');
+    Route::delete('/sub-kriteria/delete/{SubCriteria}', 'subCriteriaDelete')->name('delete');
+});
