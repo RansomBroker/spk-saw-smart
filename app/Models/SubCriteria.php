@@ -12,4 +12,9 @@ class SubCriteria extends Model
     protected $table = 'sub_criteria';
 
     protected $fillable = ['criteria_id', 'name', 'value'];
+
+    public function criteria()
+    {
+        return $this->belongsTo(Criteria::class, 'criteria_id', 'id');
+    }
 }
