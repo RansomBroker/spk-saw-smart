@@ -39,7 +39,7 @@
                         <td>
                             <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#editDataCandidate{{$candidate->id}}Modal"><i class="fa fa-edit" aria-hidden="true"></i>
                             </button>
-                            <form action="{{ route('criteria.delete', $candidate->id) }}" method="POST" class="m-0 p-0">
+                            <form action="{{ route('candidate.delete', $candidate->id) }}" method="POST" class="m-0 p-0">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash" aria-hidden="true"></i>
@@ -73,7 +73,7 @@
                         @foreach($criteriaData as $criteria)
                             <div class="form-group mb-3">
                                 <label for="sub_criteria_id" class="form-label">{{ $criteria->name }} ({{$criteria->code}})<sup class="text-warning">*</sup></label>
-                                <select name="sub_criteria_id" id="sub_criteria_id" class="form-control" required>
+                                <select name="sub_criteria_id[]" id="sub_criteria_id" class="form-control" required>
                                     <option value="">--- pilih sub kriteria ---</option>
                                     @foreach($criteria->subCriteria as $subCriteria)
                                         <option value="{{ $subCriteria->id }}">{{ $subCriteria->name }}</option>
@@ -100,8 +100,9 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{route('candidate.add')}}" method="POST">
+                        <form action="{{route('candidate.edit', $candidate->id)}}" method="POST">
                             @csrf
+                            @method('PATCH')
                             <div class="form-group mb-3">
                                 <label for="name" class="form-label">Nama Calon <sup class="text-warning">*</sup></label>
                                 <input type="text" name="name" id="name" class="form-control" placeholder="ex: Andi" required value="{{ $candidate->name }}">
@@ -109,7 +110,7 @@
                             @foreach($candidate->rating as $rating)
                                 <div class="form-group mb-3">
                                     <label for="sub_criteria_id" class="form-label">{{ $rating->subCriteria->criteria->name }} ({{$rating->subCriteria->criteria->code}})<sup class="text-warning">*</sup></label>
-                                    <select name="sub_criteria_id" id="sub_criteria_id" class="form-control" required>
+                                    <select name="sub_criteria_id[]" id="sub_criteria_id" class="form-control" required>
                                         <option value="">--</option>
                                         @foreach($subCriteriaData as $subCriteria)
                                             @if($subCriteria->criteria_id == $rating->subCriteria->criteria_id)
