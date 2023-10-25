@@ -47,8 +47,8 @@
         </a>
     </li>
 
-    <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+    <li class="nav-item @if(Route::is('calculate.view') || Route::is('calculate.result')) active @endif">
+        <a class="nav-link" href="{{ route('calculate.view') }}">
             <i class="fa fa-calculator" aria-hidden="true"></i>
             <span>Perhitungan</span>
         </a>
