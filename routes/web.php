@@ -5,6 +5,7 @@ use App\Http\Controllers\CriteriaContoller;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SubCriteriaController;
 use App\Http\Controllers\CandidateController;
+use App\Http\Controllers\CalculateController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -42,4 +43,10 @@ Route::controller(CandidateController::class)->name('candidate.')->group(functio
     Route::post('/data-calon/add', 'candidateAdd')->name('add');
     Route::patch('/data-calon/edit/{candidate}', 'candidateEdit')->name('edit');
     Route::delete('/data-calon/delete/{candidate}', 'candidateDelete')->name('delete');
+});
+
+Route::controller(CalculateController::class)->name('calculate')->group(function () {
+    Route::get('/kalkulasi', 'calculateView')->name('view');
+    Route::get('/kalkulasi/hasil', 'calculateResult')->name('result');
+    Route::post('/kalkulasi/proses', 'calculate')->name('process');
 });
