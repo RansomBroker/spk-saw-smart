@@ -6,7 +6,7 @@ use App\Models\SubCriteria;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class SubCriteriasSedeer extends Seeder
+class SubCriteriasSeeder extends Seeder
 {
     /**
      * Run the database seeds.
