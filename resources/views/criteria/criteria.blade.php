@@ -21,8 +21,8 @@
             <i class="fa fa-table" aria-hidden="true"></i>
             Tabel Data Kriteria
         </div>
-        <div class="card-body table-responsive table-bordered">
-            <table class="table table-sm table-striped table-hover" id="kriteria-table">
+        <div class="card-body table-responsive">
+            <table class="table table-sm table-striped table-hover table-bordered" id="kriteria-table">
                 <thead class="bg-primary text-white">
                     <tr>
                         <th class="text-center">No</th>
