@@ -10,4 +10,9 @@ class Result extends Model
     use HasFactory;
 
     protected $fillable = ['candidates_id', 'category', 'rank', 'score'];
+
+    public function candidate()
+    {
+        return $this->belongsTo(Candidate::class, 'candidates_id', 'id');
+    }
 }
