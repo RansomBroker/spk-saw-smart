@@ -45,8 +45,7 @@ Route::controller(CandidateController::class)->name('candidate.')->group(functio
     Route::delete('/data-calon/delete/{candidate}', 'candidateDelete')->name('delete');
 });
 
-Route::controller(CalculateController::class)->name('calculate')->group(function () {
+Route::controller(CalculateController::class)->name('calculate.')->group(function () {
     Route::get('/kalkulasi', 'calculateView')->name('view');
-    Route::get('/kalkulasi/hasil', 'calculateResult')->name('result');
     Route::post('/kalkulasi/proses', 'calculate')->name('process');
 });

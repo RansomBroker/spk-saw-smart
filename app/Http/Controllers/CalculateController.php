@@ -13,11 +13,6 @@ class CalculateController extends Controller
         return view('calculates.calculate');
     }
 
-    public function calculateResult()
-    {
-
-    }
-
     public function calculate(Request $request)
     {
         $data = [
