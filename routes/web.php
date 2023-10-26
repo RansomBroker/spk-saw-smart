@@ -6,6 +6,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SubCriteriaController;
 use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\CalculateController;
+use App\Http\Controllers\CompareController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -48,4 +50,8 @@ Route::controller(CandidateController::class)->name('candidate.')->group(functio
 Route::controller(CalculateController::class)->name('calculate.')->group(function () {
     Route::get('/kalkulasi', 'calculateView')->name('view');
     Route::post('/kalkulasi/proses', 'calculate')->name('process');
+});
+
+Route::controller(CompareController::class)->name('compare.')->group(function () {
+    Route::get('/perbandingan', 'compareView')->name('view');
 });
