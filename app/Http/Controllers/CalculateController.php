@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Candidate;
 use App\Models\Criteria;
+use App\Models\Result;
 use Illuminate\Http\Request;
 
 class CalculateController extends Controller
 {
     public function calculateView()
     {
-        return view('calculates.calculate');
+        $isCalculate = false;
+        return view('calculates.calculate', compact('isCalculate'));
     }
 
     public function calculate(Request $request)
@@ -20,11 +22,42 @@ class CalculateController extends Controller
             'candidate' => Candidate::with('rating.subCriteria.criteria')->get()
         ];
 
+        $isCalculate = true;
+
         if ($request->calculate_type == 1) {
-            $this->saw($data);
+            $result = $this->saw($data);
+
+            $resultInsertData = $result['ranking']->map(function ($item) {
+                return [
+                    'candidates_id' => $item['candidates_id'],
+                    'category' => 1,
+                    'rank' => $item['rank'],
+                    'score' => $item['score']
+                ];
+            })->toArray();
+
+            Result::where('category', 1)->delete();
+
+            Result::insert($resultInsertData);
         } else {
-            $this->smart($data);
+            $result = $this->smart($data);
+
+            $resultInsertData = $result['ranking']->map(function ($item) {
+                return [
+                    'candidates_id' => $item['candidates_id'],
+                    'category' => 2,
+                    'rank' => $item['rank'],
+                    'score' => $item['score']
+                ];
+            })->toArray();
+
+            Result::where('category', 2)->delete();
+
+            Result::insert($resultInsertData);
         }
+
+
+        return view('calculates.calculate', compact('isCalculate', 'data', 'result'));
     }
 
     private function saw($data)
@@ -84,12 +117,17 @@ class CalculateController extends Controller
         $ranking = $sortedRanking->map(function ($item, $rangking) {
             return [
                 'name' => $item['name'],
-                'candidate_id' => $item['candidate_id'],
+                'candidates_id' => $item['candidate_id'],
                 'result' => $item['result'],
-                'ranking' => $rangking+1
+                'rank' => $rangking+1,
+                'score'=> $item['result']
             ];
         })->values();
 
+        return [
+            'normalize_matrix' => $normalizeCandidate,
+            'ranking' => $ranking
+        ];
     }
 
     private function smart($data)
@@ -149,10 +187,16 @@ class CalculateController extends Controller
         $ranking = $sortedRanking->map(function ($item, $rangking) {
             return [
                 'name' => $item['name'],
-                'candidate_id' => $item['candidate_id'],
+                'candidates_id' => $item['candidate_id'],
                 'result' => $item['result'],
-                'ranking' => $rangking+1
+                'rank' => $rangking+1,
+                'score'=> $item['result']
             ];
         })->values();
+
+        return [
+            'normalize_matrix' => $normalizeCandidate,
+            'ranking' => $ranking
+        ];
     }
 }
