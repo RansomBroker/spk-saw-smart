@@ -54,10 +54,10 @@
         </a>
     </li>
 
-    <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+    <li class="nav-item @if(Route::is('compare.view')) active @endif">
+        <a class="nav-link" href="{{ route('compare.view') }}">
             <i class="fas fa-fw fa-chart-area"></i>
-            <span>Perbandingan</span>
+            <span>Perbandingan (Hasil Akhir)</span>
         </a>
     </li>
 
