@@ -6,19 +6,19 @@
             <div class="col-xl-4 col-lg-4 col-md-4">
                 <div class="card o-hidden border-0 shadow-lg my-5">
                     <div class="card-body p-0">
-
-                        @if($status = Session::get('status'))
-                            @if($message = Session::get('message'))
-                                <div class="alert alert-{{ $status }} alert-dismissible fade show mb-3" role="alert">
-                                    {{ $message }}
-                                </div>
-                            @endif
-                        @endif
-
                         <div class="p-5">
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Login Account</h1>
                             </div>
+
+                            @if($status = Session::get('status'))
+                                @if($message = Session::get('message'))
+                                    <div class="alert alert-{{ $status }} alert-dismissible fade show mb-3" role="alert">
+                                        {{ $message }}
+                                    </div>
+                                @endif
+                            @endif
+
                             <form class="user" method="post" action="{{ route('user.login.auth') }}">
                                 @csrf
                                 <div class="form-group">
