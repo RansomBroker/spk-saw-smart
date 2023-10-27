@@ -49,12 +49,14 @@
                             <td>
                                 <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#editData{{$user->id}}Modal"><i class="fa fa-edit" aria-hidden="true"></i>
                                 </button>
-                                <form action="{{ route('user.delete', $user->id) }}" method="POST" class="m-0 p-0">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash" aria-hidden="true"></i>
-                                    </button>
-                                </form>
+                                @if($user->id != 1)
+                                    <form action="{{ route('user.delete', $user->id) }}" method="POST" class="m-0 p-0">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash" aria-hidden="true"></i>
+                                        </button>
+                                    </form>
+                                @endif
                             </td>
                         </tr>
                     @endforeach
