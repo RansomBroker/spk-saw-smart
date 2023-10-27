@@ -13,15 +13,19 @@
 
     <div id="wrapper">
 
-        @include('includes.sidebar')
+        @if(!Route::is('user.login.view'))
+            @include('includes.sidebar')
+        @endif
 
         <div id="content-wrapper" class="d-flex flex-column">
 
             <div id="content">
 
-                @include('includes.navbar')
+                @if(!Route::is('user.login.view'))
+                    @include('includes.navbar')
+                @endif
 
-                <div class="container-fluid">
+                <div class="container-fluid @if(Route::is('user.login.view')) p-0 @endif">
                     @yield('content')
                 </div>
 
