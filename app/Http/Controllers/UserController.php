@@ -44,7 +44,7 @@ class UserController extends Controller
         $request->session()->flash('status', 'warning');
         $request->session()->flash('message', 'Berhasil update data user');
 
-        return redirect()->route('user.view');
+        return redirect()->back();
     }
 
     public function userDelete(Request $request, User $user)

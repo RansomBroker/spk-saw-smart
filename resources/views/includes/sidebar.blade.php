@@ -76,7 +76,7 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+        <a href="#" type="button" class="nav-link" data-toggle="modal" data-target="#editUserModal">
             <i class="fa fa-user" aria-hidden="true"></i>
             <span>Data Profile</span>
         </a>
