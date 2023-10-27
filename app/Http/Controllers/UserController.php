@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -54,5 +55,31 @@ class UserController extends Controller
         $request->session()->flash('message', 'Berhasil hapus data user');
 
         return redirect()->route('user.view');
+    }
+
+    // user login
+
+    public function loginView()
+    {
+        return view('auth.login');
+    }
+
+    public function auth(Request $request)
+    {
+        $credentials = $request->validate([
+            'email' => 'required',
+            'password' => 'required'
+        ]);
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
+            return redirect()->intended('/');
+        }
+
+        $request->session()->flash('status', 'danger');
+        $request->session()->flash('message', 'Silahkan cek kembali informasi login anda');
+
+        return redirect()->back();
     }
 }

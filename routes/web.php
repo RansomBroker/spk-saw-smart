@@ -21,47 +21,49 @@ use App\Http\Controllers\UserController;
 */
 
 
-Route::controller(DashboardController::class)->name('dashboard.')->group(function () {
-    Route::get('/', 'dashboardView')->name('view');
-});
+Route::middleware('auth.check')->group(function () {
+    Route::controller(DashboardController::class)->name('dashboard.')->group(function () {
+        Route::get('/', 'dashboardView')->name('view');
+    });
 
-Route::controller(CriteriaContoller::class)->name('criteria.')->group(function () {
-    Route::get('/kriteria', 'criteriaView')->name('view');
-    Route::post('/kriteria/add', 'criteriaAdd')->name('add');
-    Route::patch('/kriteria/edit/{criteria}', 'criteriaEdit')->name('edit');
-    Route::delete('/kriteria/delete/{criteria}', 'criteriaDelete')->name('delete');
-});
+    Route::controller(CriteriaContoller::class)->name('criteria.')->group(function () {
+        Route::get('/kriteria', 'criteriaView')->name('view');
+        Route::post('/kriteria/add', 'criteriaAdd')->name('add');
+        Route::patch('/kriteria/edit/{criteria}', 'criteriaEdit')->name('edit');
+        Route::delete('/kriteria/delete/{criteria}', 'criteriaDelete')->name('delete');
+    });
 
-Route::controller(SubCriteriaController::class)->name('subcrit.')->group(function () {
-    Route::get('/sub-kriteria', 'subCriteriaView')->name('view');
-    Route::post('/sub-kriteria', 'subCriteriaAdd')->name('add');
-    Route::patch('/sub-kriteria/edit/{subCriteria}', 'subCriteriaEdit')->name('edit');
-    Route::delete('/sub-kriteria/delete/{subCriteria}', 'subCriteriaDelete')->name('delete');
-});
+    Route::controller(SubCriteriaController::class)->name('subcrit.')->group(function () {
+        Route::get('/sub-kriteria', 'subCriteriaView')->name('view');
+        Route::post('/sub-kriteria', 'subCriteriaAdd')->name('add');
+        Route::patch('/sub-kriteria/edit/{subCriteria}', 'subCriteriaEdit')->name('edit');
+        Route::delete('/sub-kriteria/delete/{subCriteria}', 'subCriteriaDelete')->name('delete');
+    });
 
-Route::controller(CandidateController::class)->name('candidate.')->group(function () {
-    Route::get('/data-calon', 'candidateView')->name('view');
-    Route::post('/data-calon/add', 'candidateAdd')->name('add');
-    Route::patch('/data-calon/edit/{candidate}', 'candidateEdit')->name('edit');
-    Route::delete('/data-calon/delete/{candidate}', 'candidateDelete')->name('delete');
-});
+    Route::controller(CandidateController::class)->name('candidate.')->group(function () {
+        Route::get('/data-calon', 'candidateView')->name('view');
+        Route::post('/data-calon/add', 'candidateAdd')->name('add');
+        Route::patch('/data-calon/edit/{candidate}', 'candidateEdit')->name('edit');
+        Route::delete('/data-calon/delete/{candidate}', 'candidateDelete')->name('delete');
+    });
 
-Route::controller(CalculateController::class)->name('calculate.')->group(function () {
-    Route::get('/kalkulasi', 'calculateView')->name('view');
-    Route::post('/kalkulasi/proses', 'calculate')->name('process');
-});
+    Route::controller(CalculateController::class)->name('calculate.')->group(function () {
+        Route::get('/kalkulasi', 'calculateView')->name('view');
+        Route::post('/kalkulasi/proses', 'calculate')->name('process');
+    });
 
-Route::controller(CompareController::class)->name('compare.')->group(function () {
-    Route::get('/perbandingan', 'compareView')->name('view');
-});
+    Route::controller(CompareController::class)->name('compare.')->group(function () {
+        Route::get('/perbandingan', 'compareView')->name('view');
+    });
 
-Route::controller(UserController::class)->name('user.')->group(function () {
-   Route::get('/data-user', 'userView')->name('view');
-   Route::post('/data-user/add', 'userAdd')->name('add');
-   Route::patch('/data-user/edit/{user}', 'userEdit')->name('edit');
-   Route::delete('/data-user/delete/{user}', 'userDelete')->name('delete');
+    Route::controller(UserController::class)->name('user.')->group(function () {
+        Route::get('/data-user', 'userView')->name('view');
+        Route::post('/data-user/add', 'userAdd')->name('add');
+        Route::patch('/data-user/edit/{user}', 'userEdit')->name('edit');
+        Route::delete('/data-user/delete/{user}', 'userDelete')->name('delete');
 
-   // login action
-    Route::get('/login','loginView')->name('login.view');
-    Route::post('/login/auth', 'auth')->name('login.auth');
+        // login action
+        Route::get('/login','loginView')->name('login.view')->withoutMiddleware('auth.check');
+        Route::post('/login/auth', 'auth')->name('login.auth')->withoutMiddleware('auth.check');
+    });
 });
