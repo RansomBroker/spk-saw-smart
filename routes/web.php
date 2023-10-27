@@ -7,6 +7,7 @@ use App\Http\Controllers\SubCriteriaController;
 use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\CalculateController;
 use App\Http\Controllers\CompareController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,4 +55,11 @@ Route::controller(CalculateController::class)->name('calculate.')->group(functio
 
 Route::controller(CompareController::class)->name('compare.')->group(function () {
     Route::get('/perbandingan', 'compareView')->name('view');
+});
+
+Route::controller(UserController::class)->name('user.')->group(function () {
+   Route::get('/data-user', 'userView')->name('view');
+   Route::post('/data-user/add', 'userAdd')->name('add');
+   Route::patch('/data-user/edit/{user}', 'userEdit')->name('edit');
+   Route::delete('/data-user/delete/{user}', 'userDelete')->name('delete');
 });
