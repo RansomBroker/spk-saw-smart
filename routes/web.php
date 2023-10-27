@@ -60,4 +60,8 @@ Route::controller(UserController::class)->name('user.')->group(function () {
    Route::post('/data-user/add', 'userAdd')->name('add');
    Route::patch('/data-user/edit/{user}', 'userEdit')->name('edit');
    Route::delete('/data-user/delete/{user}', 'userDelete')->name('delete');
+
+   // login action
+    Route::get('/login','loginView')->name('login.view');
+    Route::post('/login/auth', 'auth')->name('login.auth');
 });
