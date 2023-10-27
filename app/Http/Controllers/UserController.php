@@ -82,4 +82,10 @@ class UserController extends Controller
 
         return redirect()->back();
     }
+
+    public function logout(Request $request)
+    {
+        $request->session()->invalidate();
+        return redirect()->intended('/login');
+    }
 }
