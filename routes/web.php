@@ -22,9 +22,7 @@ use App\Http\Controllers\UserController;
 
 
 Route::controller(DashboardController::class)->name('dashboard.')->group(function () {
-    Route::get('/', function () {
-        return view('welcome');
-    });
+    Route::get('/', 'dashboardView')->name('view');
 });
 
 Route::controller(CriteriaContoller::class)->name('criteria.')->group(function () {
