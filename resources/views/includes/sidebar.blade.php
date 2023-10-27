@@ -26,61 +26,83 @@
         Master Data
     </div>
 
-    <li class="nav-item @if(Route::is('criteria.view')) active @endif">
-        <a class="nav-link" href="{{ route('criteria.view') }}">
-            <i class="fas fa-fw fa-chart-area"></i>
-            <span>Data Kriteria</span>
-        </a>
-    </li>
+    @if(Auth::user()->role == 1)
+        <li class="nav-item @if(Route::is('criteria.view')) active @endif">
+            <a class="nav-link" href="{{ route('criteria.view') }}">
+                <i class="fas fa-fw fa-chart-area"></i>
+                <span>Data Kriteria</span>
+            </a>
+        </li>
 
-    <li class="nav-item @if(Route::is('subcrit.view')) active @endif">
-        <a class="nav-link" href="{{ route('subcrit.view') }}">
-            <i class="fa fa-th-list" aria-hidden="true"></i>
-            <span>Data Sub Kriteria</span>
-        </a>
-    </li>
+        <li class="nav-item @if(Route::is('subcrit.view')) active @endif">
+            <a class="nav-link" href="{{ route('subcrit.view') }}">
+                <i class="fa fa-th-list" aria-hidden="true"></i>
+                <span>Data Sub Kriteria</span>
+            </a>
+        </li>
 
-    <li class="nav-item @if(Route::is('candidate.view')) active @endif">
-        <a class="nav-link" href="{{ route('candidate.view') }}">
-            <i class="fa fa-users" aria-hidden="true"></i>
-            <span>Data Calon</span>
-        </a>
-    </li>
+        <li class="nav-item @if(Route::is('candidate.view')) active @endif">
+            <a class="nav-link" href="{{ route('candidate.view') }}">
+                <i class="fa fa-users" aria-hidden="true"></i>
+                <span>Data Calon</span>
+            </a>
+        </li>
 
-    <li class="nav-item @if(Route::is('calculate.view') || Route::is('calculate.result')) active @endif">
-        <a class="nav-link" href="{{ route('calculate.view') }}">
-            <i class="fa fa-calculator" aria-hidden="true"></i>
-            <span>Perhitungan</span>
-        </a>
-    </li>
+        <li class="nav-item @if(Route::is('calculate.view') || Route::is('calculate.result')) active @endif">
+            <a class="nav-link" href="{{ route('calculate.view') }}">
+                <i class="fa fa-calculator" aria-hidden="true"></i>
+                <span>Perhitungan</span>
+            </a>
+        </li>
 
-    <li class="nav-item @if(Route::is('compare.view')) active @endif">
-        <a class="nav-link" href="{{ route('compare.view') }}">
-            <i class="fas fa-fw fa-chart-area"></i>
-            <span>Perbandingan (Hasil Akhir)</span>
-        </a>
-    </li>
+        <li class="nav-item @if(Route::is('compare.view')) active @endif">
+            <a class="nav-link" href="{{ route('compare.view') }}">
+                <i class="fas fa-fw fa-chart-area"></i>
+                <span>Perbandingan (Hasil Akhir)</span>
+            </a>
+        </li>
 
-    <!-- Divider -->
-    <hr class="sidebar-divider d-none d-md-block">
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block">
 
-    <div class="sidebar-heading">
-        Master User
-    </div>
+        <div class="sidebar-heading">
+            Master User
+        </div>
 
-    <li class="nav-item @if(Route::is('user.view')) active @endif">
-        <a class="nav-link" href="{{ route('user.view') }}">
-            <i class="fa fa-address-book" aria-hidden="true"></i>
-            <span>Data User</span>
-        </a>
-    </li>
+        <li class="nav-item @if(Route::is('user.view')) active @endif">
+            <a class="nav-link" href="{{ route('user.view') }}">
+                <i class="fa fa-address-book" aria-hidden="true"></i>
+                <span>Data User</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="#" type="button" class="nav-link" data-toggle="modal" data-target="#editUserModal">
+                <i class="fa fa-user" aria-hidden="true"></i>
+                <span>Data Profile</span>
+            </a>
+        </li>
+    @else
+        <li class="nav-item @if(Route::is('compare.view')) active @endif">
+            <a class="nav-link" href="{{ route('compare.view') }}">
+                <i class="fas fa-fw fa-chart-area"></i>
+                <span>Perbandingan (Hasil Akhir)</span>
+            </a>
+        </li>
 
-    <li class="nav-item">
-        <a href="#" type="button" class="nav-link" data-toggle="modal" data-target="#editUserModal">
-            <i class="fa fa-user" aria-hidden="true"></i>
-            <span>Data Profile</span>
-        </a>
-    </li>
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block">
+
+        <div class="sidebar-heading">
+            Master User
+        </div>
+
+        <li class="nav-item">
+            <a href="#" type="button" class="nav-link" data-toggle="modal" data-target="#editUserModal">
+                <i class="fa fa-user" aria-hidden="true"></i>
+                <span>Data Profile</span>
+            </a>
+        </li>
+    @endif
 
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">
