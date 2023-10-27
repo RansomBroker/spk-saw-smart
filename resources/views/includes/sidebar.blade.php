@@ -68,8 +68,8 @@
         Master User
     </div>
 
-    <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+    <li class="nav-item @if(Route::is('compare.view')) active @endif">
+        <a class="nav-link" href="{{ route('user.view') }}">
             <i class="fa fa-address-book" aria-hidden="true"></i>
             <span>Data User</span>
         </a>
