@@ -65,5 +65,6 @@ Route::middleware('auth.check')->group(function () {
         // login action
         Route::get('/login','loginView')->name('login.view')->withoutMiddleware('auth.check');
         Route::post('/login/auth', 'auth')->name('login.auth')->withoutMiddleware('auth.check');
+        Route::post('/logout', 'logout')->name('logout');
     });
 });
